@@ -1,3 +1,15 @@
+How to run
+----------
+```
+mkdir npm-data && cd $_
+
+docker create \
+	--name sonarr \
+	-p 5080:5080 \
+	-v ${PWD}:/npm-data \
+	local-npm
+```
+
 Clearing the cache
 ------------------
 
