@@ -1,6 +1,6 @@
-FROM node:4
+FROM node:alpine
 
-RUN npm install -g local-npm
+RUN npm i -g npm && npm i -g local-npm
 
 EXPOSE 5080
 
