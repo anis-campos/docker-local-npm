@@ -1,15 +1,6 @@
 FROM node:8.7.0
 
-ENV USER=myuser USER_ID=1000 USER_GID=1000
-
-# now creating user
-RUN groupadd --gid "${USER_GID}" "${USER}" && \
-    useradd \
-      --uid ${USER_ID} \
-      --gid ${USER_GID} \
-      --create-home \
-      --shell /bin/bash \
-      ${USER}
+ENV USER=node USER_ID=1000 USER_GID=1000
 
 COPY entrypoint.sh /
 RUN  chmod u+x entrypoint.sh
