@@ -1,6 +1,18 @@
-FROM node:alpine
+FROM node:8.7.0
 
-RUN mkdir /npm-data && chown node: /npm-data && chmod 777 /npm-data
+ENV USER=myuser USER_ID=1000 USER_GID=1000
+
+# now creating user
+RUN groupadd --gid "${USER_GID}" "${USER}" && \
+    useradd \
+      --uid ${USER_ID} \
+      --gid ${USER_GID} \
+      --create-home \
+      --shell /bin/bash \
+      ${USER}
+
+COPY entrypoint.sh /
+RUN  chmod u+x entrypoint.sh
 
 USER node
 
@@ -15,6 +27,6 @@ EXPOSE 5080
 
 VOLUME /npm-data
 
-ENTRYPOINT ["local-npm"]
+ENTRYPOINT ["/entrypoint.sh"]
 
-CMD ["-d", "/npm-data"]
+CMD ["local-npm","-d", "/npm-data"]
