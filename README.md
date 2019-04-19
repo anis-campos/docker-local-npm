@@ -1,10 +1,10 @@
 How to run
 ----------
-```
+```bash
 mkdir npm-data && cd $_
 
 docker create \
-	--name sonarr \
+	--name local-npm \
 	-p 5080:5080 \
 	-v ${PWD}:/npm-data \
 	local-npm
